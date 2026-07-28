@@ -37,6 +37,10 @@
   color: var(--clr-text);
 }
 
+.topbar-search-container {
+  width: 320px;
+}
+
 .icon-button {
   width: 42px;
   height: 42px;
@@ -102,7 +106,6 @@
 }
 
 @media (max-width: 768px) {
-
   .menu-button {
     display: grid;
     place-items: center;

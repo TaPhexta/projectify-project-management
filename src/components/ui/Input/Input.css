@@ -1,0 +1,39 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-label {
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+
+  padding: 0.85rem 1rem;
+
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+
+  background: var(--clr-bg);
+
+  color: var(--clr-text);
+
+  outline: none;
+
+  transition: var(--transition);
+}
+
+.input:focus {
+  border-color: var(--clr-primary);
+}
+
+.input-error {
+  border-color: #dc2626;
+}
+
+.input-error-message {
+  color: #dc2626;
+  font-size: 0.85rem;
+}

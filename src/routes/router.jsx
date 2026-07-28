@@ -2,12 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 
 import MainLayout from "../components/layout/MainLayout";
 
-import Dashboard from "../pages/Dashboard";
-import Projects from "../pages/Projects";
-import Calendar from "../pages/Calendar";
-import Settings from "../pages/Settings";
-import Profile from "../pages/Profile";
-import NotFound from "../pages/NotFound"
+import Dashboard from "../pages/Dashboard/Dashboard";
+import Projects from "../pages/Projects/Projects";
+import Calendar from "../pages/Calendar/Calendar";
+import Settings from "../pages/Settings/Settings";
+import Profile from "../pages/Profile/Profile";
+import NotFound from "../pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {

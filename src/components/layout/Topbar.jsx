@@ -1,6 +1,7 @@
 import "./Topbar.css";
 
 import { MdMenu, MdNotificationsNone } from "react-icons/md";
+import Input from "../ui/Input/Input";
 
 function Topbar({ toggleSidebar }) {
   return (
@@ -10,7 +11,9 @@ function Topbar({ toggleSidebar }) {
           <MdMenu />
         </button>
 
-        <input className="topbar-search" placeholder="Search..." />
+        <div className="topbar-search-container">
+          <Input placeholder="Search..." />
+        </div>
       </div>
 
       <div className="topbar-right">
