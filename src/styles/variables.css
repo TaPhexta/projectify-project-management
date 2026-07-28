@@ -1,0 +1,30 @@
+:root {
+  /* Colours */
+  --clr-primary: #6c63ff;
+  --clr-primary-hover: #5b54d8;
+
+  --clr-bg: #111827;
+  --clr-surface: #1f2937;
+  --clr-surface-light: #374151;
+
+  --clr-text: #f9fafb;
+  --clr-text-muted: #9ca3af;
+
+  --clr-border: #374151;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --topbar-height: 70px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Shadow */
+  --shadow:
+    0 10px 25px rgba(0,0,0,.25);
+
+  /* Transition */
+  --transition: .25s ease;
+}

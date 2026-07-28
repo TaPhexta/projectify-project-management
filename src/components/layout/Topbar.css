@@ -1,0 +1,126 @@
+.topbar {
+  height: var(--topbar-height);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 2rem;
+
+  border-bottom: 1px solid var(--clr-border);
+
+  background: var(--clr-surface);
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-right {
+  gap: 1rem;
+}
+
+.topbar-search {
+  width: 320px;
+
+  padding: 0.75rem 1rem;
+
+  border: none;
+  outline: none;
+
+  border-radius: var(--radius-md);
+
+  background: var(--clr-bg);
+
+  color: var(--clr-text);
+}
+
+.icon-button {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--clr-text);
+
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+.icon-button:hover {
+  background: var(--clr-surface-light);
+}
+
+.profile-preview {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+}
+
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--clr-primary);
+
+  color: white;
+
+  font-weight: bold;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-weight: 600;
+}
+
+.profile-role {
+  color: var(--clr-text-muted);
+  font-size: 0.85rem;
+}
+
+.menu-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .menu-button {
+    display: grid;
+    place-items: center;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: var(--clr-text);
+
+    cursor: pointer;
+  }
+
+  .topbar-search {
+    width: 180px;
+  }
+}
