@@ -21,13 +21,45 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
       ...prev,
       [name]: value,
     }));
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   }
 
+  const [errors, setErrors] = useState({});
+
+  function validateForm() {
+    const newErrors = {};
+
+    if (!formData.title.trim()) {
+      newErrors.title = "Project title is required.";
+    } else if (formData.title.trim().length < 3) {
+      newErrors.title = "Project title must be at least 3 characters.";
+    } else if (formData.title.trim().length > 50) {
+      newErrors.title = "Project title cannot exceed 50 characters.";
+    }
+
+    if (formData.description.length > 300) {
+      newErrors.description = "Description cannot exceed 300 characters.";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  }
   function handleSubmit(event) {
     event.preventDefault();
 
+    if (!validateForm()) {
+      return;
+    }
+
     const projectData = {
       ...formData,
+      title: formData.title.trim(),
+      description: formData.description.trim(),
       id: project ? project.id : crypto.randomUUID(),
       createdAt: project ? project.createdAt : new Date().toISOString(),
     };
@@ -44,6 +76,8 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
       status: "Planning",
       dueDate: "",
     });
+
+    setErrors({});
   }
 
   useEffect(() => {
@@ -54,6 +88,7 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
         status: project.status,
         dueDate: project.dueDate,
       });
+      setErrors({});
     } else {
       setFormData({
         title: "",
@@ -61,6 +96,7 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
         status: "Planning",
         dueDate: "",
       });
+      setErrors({});
     }
   }, [project]);
 
@@ -72,6 +108,7 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
         type="text"
         value={formData.title}
         onChange={handleChange}
+        error={errors.title}
       />
 
       <Input
@@ -80,6 +117,7 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
         type="textarea"
         value={formData.description}
         onChange={handleChange}
+        error={errors.description}
       />
 
       <Input
@@ -88,6 +126,7 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
         name="dueDate"
         value={formData.dueDate}
         onChange={handleChange}
+        error={errors.dueDate}
       />
 
       <Input
