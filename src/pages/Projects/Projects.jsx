@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./Projects.css";
 
@@ -6,8 +6,17 @@ import ProjectCard from "../../components/common/ProjectCard/ProjectCard";
 import ProjectForm from "../../components/common/ProjectForm/ProjectForm";
 
 function Projects() {
-  const [projects, setProjects] = useState([]);
+  const STORAGE_KEY = "projectify-projects";
+  const [projects, setProjects] = useState(() => {
+    const savedProjects = localStorage.getItem(STORAGE_KEY);;
+
+    return savedProjects ? JSON.parse(savedProjects) : [];
+  });
   const [editingProject, setEditingProject] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+  }, [projects]);
 
   function handleCreateProject(project) {
     setProjects((prevProjects) => [...prevProjects, project]);
