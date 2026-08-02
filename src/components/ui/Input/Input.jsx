@@ -10,6 +10,7 @@ function Input({
   id,
   disabled = false,
   error = "",
+  options = [],
 }) {
   return (
     <div className="input-group">
@@ -29,6 +30,21 @@ function Input({
           disabled={disabled}
           className={`input ${error ? "input-error" : ""}`}
         />
+      ) : type === "select" ? (
+        <select
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          className={`input ${error ? "input-error" : ""}`}
+        >
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       ) : (
         <input
           id={id}

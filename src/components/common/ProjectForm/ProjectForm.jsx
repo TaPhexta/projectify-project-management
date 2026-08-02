@@ -29,9 +29,7 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
     const projectData = {
       ...formData,
       id: project ? project.id : crypto.randomUUID(),
-      createdAt: project
-        ? project.createdAt
-        : new Date().toISOString(),
+      createdAt: project ? project.createdAt : new Date().toISOString(),
     };
 
     if (project) {
@@ -90,6 +88,15 @@ function ProjectForm({ onCreateProject, onUpdateProject, project }) {
         name="dueDate"
         value={formData.dueDate}
         onChange={handleChange}
+      />
+
+      <Input
+        label="Status"
+        type="select"
+        name="status"
+        value={formData.status}
+        onChange={handleChange}
+        options={["Planning", "In Progress", "Completed"]}
       />
 
       <Button type="submit">
