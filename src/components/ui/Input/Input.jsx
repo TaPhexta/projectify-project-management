@@ -19,16 +19,28 @@ function Input({
         </label>
       )}
 
-      <input
-        id={id}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        className={`input ${error ? "input-error" : ""}`}
-      />
+      {type === "textarea" ? (
+        <textarea
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          className={`input ${error ? "input-error" : ""}`}
+        />
+      ) : (
+        <input
+          id={id}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          className={`input ${error ? "input-error" : ""}`}
+        />
+      )}
 
       {error && <p className="input-error-message">{error}</p>}
     </div>
