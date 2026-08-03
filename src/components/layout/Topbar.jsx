@@ -1,9 +1,14 @@
+import { useContext } from "react";
+import ProjectContext from "../../context/ProjectContext";
+
 import "./Topbar.css";
 
 import { MdMenu, MdNotificationsNone } from "react-icons/md";
 import Input from "../ui/Input/Input";
 
 function Topbar({ toggleSidebar }) {
+  const { searchQuery, setSearchQuery } = useContext(ProjectContext);
+
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -12,7 +17,11 @@ function Topbar({ toggleSidebar }) {
         </button>
 
         <div className="topbar-search-container">
-          <Input placeholder="Search..." />
+          <Input
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
         </div>
       </div>
 

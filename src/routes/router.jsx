@@ -4,7 +4,7 @@ import MainLayout from "../components/layout/MainLayout";
 
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Projects from "../pages/Projects/Projects";
-import Calendar from "../pages/Calendar/Calendar";
+import Calendar from "../pages/Calender/Calendar";
 import Settings from "../pages/Settings/Settings";
 import Profile from "../pages/Profile/Profile";
 import NotFound from "../pages/NotFound/NotFound";

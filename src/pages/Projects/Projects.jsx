@@ -6,9 +6,9 @@ import "./Projects.css";
 
 import ProjectCard from "../../components/common/ProjectCard/ProjectCard";
 import ProjectForm from "../../components/common/ProjectForm/ProjectForm";
-import Input from "../../components/ui/Input/Input";
 
 function Projects() {
+  const [statusFilter, setStatusFilter] = useState("All");
   const {
     projects,
     editingProject,
@@ -16,10 +16,9 @@ function Projects() {
     handleDeleteProject,
     handleUpdateProject,
     handleEditProject,
+    searchQuery,
   } = useContext(ProjectContext);
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState("All");
 
   const filteredProjects = projects.filter((project) => {
     const matchesSearch = project.title
@@ -37,15 +36,6 @@ function Projects() {
       <div className="page-header">
         <h1>Projects</h1>
         <p>Manage all your projects in one place.</p>
-      </div>
-
-      <div className="projects-search">
-        <Input
-          type="text"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-          placeholder="Search projects"
-        />
       </div>
 
       <div className="projects-filters">

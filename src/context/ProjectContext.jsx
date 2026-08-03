@@ -5,6 +5,7 @@ const ProjectContext = createContext();
 const STORAGE_KEY = "projectify-projects";
 
 function ProjectProvider({ children }) {
+  const [searchQuery, setSearchQuery] = useState("");
   const [projects, setProjects] = useState(() => {
     const savedProjects = localStorage.getItem(STORAGE_KEY);
 
@@ -46,7 +47,8 @@ function ProjectProvider({ children }) {
       value={{
         projects,
         editingProject,
-
+        searchQuery,
+        setSearchQuery,
         handleCreateProject,
         handleDeleteProject,
         handleUpdateProject,

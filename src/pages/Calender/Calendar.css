@@ -1,0 +1,22 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 600px;
+
+  border-radius: var(--radius-lg);
+
+  background: var(--clr-surface);
+
+  border: 1px solid var(--clr-border);
+}
+
+.calendar-container {
+  padding: 1rem;
+
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--clr-surface);
+}
