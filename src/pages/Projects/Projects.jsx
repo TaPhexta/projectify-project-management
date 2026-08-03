@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+
+import ProjectContext from "../../context/ProjectContext";
 
 import "./Projects.css";
 
@@ -7,40 +9,14 @@ import ProjectForm from "../../components/common/ProjectForm/ProjectForm";
 import Input from "../../components/ui/Input/Input";
 
 function Projects() {
-  const STORAGE_KEY = "projectify-projects";
-  const [projects, setProjects] = useState(() => {
-    const savedProjects = localStorage.getItem(STORAGE_KEY);
-
-    return savedProjects ? JSON.parse(savedProjects) : [];
-  });
-  const [editingProject, setEditingProject] = useState(null);
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-  }, [projects]);
-
-  function handleCreateProject(project) {
-    setProjects((prevProjects) => [...prevProjects, project]);
-  }
-
-  function handleDeleteProject(projectId) {
-    setProjects((prevProjects) =>
-      prevProjects.filter((project) => project.id !== projectId),
-    );
-  }
-
-  function handleUpdateProject(updatedProject) {
-    setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project.id === updatedProject.id ? updatedProject : project,
-      ),
-    );
-    setEditingProject(null);
-  }
-
-  function handleEditProject(project) {
-    setEditingProject(project);
-  }
+  const {
+    projects,
+    editingProject,
+    handleCreateProject,
+    handleDeleteProject,
+    handleUpdateProject,
+    handleEditProject,
+  } = useContext(ProjectContext);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
