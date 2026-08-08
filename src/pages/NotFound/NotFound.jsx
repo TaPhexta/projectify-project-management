@@ -1,12 +1,38 @@
-function NotFound() {
-  return (
-    <section className="page">
-      <div className="page-header">
-        <h1>NotFound</h1>
-        <p>Manage all your projects in one place.</p>
-      </div>
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-      {/* Page content goes here */}
+import "./NotFound.css";
+
+function NotFound() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  return (
+    <section className="not-found-page">
+      <div className="not-found-card">
+        <span className="error-code">404</span>
+
+        <h1>Page Not Found</h1>
+
+        <p>
+          The page
+          <code>{location.pathname}</code>
+          could not be found.
+        </p>
+
+        <p className="error-hint">
+          Double-check the URL or return to a known page.
+        </p>
+
+        <div className="not-found-actions">
+          <button className="secondary-button" onClick={() => navigate(-1)}>
+            Go Back
+          </button>
+
+          <Link to="/" className="primary-button">
+            Dashboard
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }

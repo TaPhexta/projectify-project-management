@@ -1,25 +1,28 @@
-import { useContext, useState } from "react";
-
-import ProjectContext from "../../context/ProjectContext";
+import { useState } from "react";
 
 import "./Projects.css";
 
 import ProjectCard from "../../components/common/ProjectCard/ProjectCard";
-import ProjectForm from "../../components/common/ProjectForm/ProjectForm";
+import Button from "../../components/ui/Button/Button";
+
+import useProjectModal from "../../hooks/useProjectModal";
+import useProjects from "../../hooks/useProjects";
+import useProjectSearch from "../../hooks/useProjectSearch";
 
 function Projects() {
+  // Local filter for filtering projects by their status.
   const [statusFilter, setStatusFilter] = useState("All");
-  const {
-    projects,
-    editingProject,
-    handleCreateProject,
-    handleDeleteProject,
-    handleUpdateProject,
-    handleEditProject,
-    searchQuery,
-  } = useContext(ProjectContext);
 
+  // Get the project data/actions we need.
+  const { projects, handleDeleteProject, handleEditProject } = useProjects();
 
+  // Get the global search text from the topbar.
+  const { searchQuery } = useProjectSearch();
+
+  // Get the function that opens the project modal.
+  const { handleOpenProjectModal } = useProjectModal();
+
+  // Apply both the global search and status filter.
   const filteredProjects = projects.filter((project) => {
     const matchesSearch = project.title
       .toLowerCase()
@@ -38,6 +41,12 @@ function Projects() {
         <p>Manage all your projects in one place.</p>
       </div>
 
+      {/* Opens the project form inside the modal. */}
+      <div className="projects-actions">
+        <Button onClick={handleOpenProjectModal}>+ New Project</Button>
+      </div>
+
+      {/* Filter projects by status. */}
       <div className="projects-filters">
         <label htmlFor="statusFilter">Status</label>
 
@@ -53,17 +62,12 @@ function Projects() {
         </select>
       </div>
 
-      <ProjectForm
-        key={editingProject?.id ?? "new"}
-        project={editingProject}
-        onCreateProject={handleCreateProject}
-        onUpdateProject={handleUpdateProject}
-      />
-
+      {/* Show this when there are no projects at all. */}
       {projects.length === 0 && (
         <p>No projects yet. Create your first project.</p>
       )}
 
+      {/* Display the filtered projects. */}
       {projects.length > 0 && (
         <div className="projects-grid">
           {filteredProjects.map((project) => (
@@ -76,6 +80,9 @@ function Projects() {
           ))}
         </div>
       )}
+
+      {/* The ProjectModal should be rendered globally,
+          preferably in your main layout, rather than here. */}
     </section>
   );
 }

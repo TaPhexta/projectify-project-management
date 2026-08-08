@@ -1,46 +1,90 @@
+import { NavLink } from "react-router-dom";
+import {
+  FiHome,
+  FiFolder,
+  FiCalendar,
+  FiSettings,
+  FiUser,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
+
 import "./Sidebar.css";
 
-import { NavLink } from "react-router-dom";
+function Sidebar({
+  sidebarOpen,
+  setSidebarOpen,
+  sidebarCollapsed,
+  toggleSidebarCollapse,
+}) {
+  const links = [
+    {
+      label: "Dashboard",
+      path: "/",
+      icon: <FiHome />,
+    },
+    {
+      label: "Projects",
+      path: "/projects",
+      icon: <FiFolder />,
+    },
+    {
+      label: "Calendar",
+      path: "/calendar",
+      icon: <FiCalendar />,
+    },
+    {
+      label: "Profile",
+      path: "/profile",
+      icon: <FiUser />,
+    },
+    {
+      label: "Settings",
+      path: "/settings",
+      icon: <FiSettings />,
+    },
+  ];
 
-import navigation from "../../data/navigation";
-
-function Sidebar({ sidebarOpen, setSidebarOpen }) {
   return (
     <>
+      {/* Mobile overlay */}
       <div
-        className={sidebarOpen ? "sidebar-overlay active" : "sidebar-overlay"}
+        className={`sidebar-overlay ${sidebarOpen ? "active" : ""}`}
         onClick={() => setSidebarOpen(false)}
       />
 
-      <aside className={sidebarOpen ? "sidebar active" : "sidebar"}>
+      <aside className={`sidebar ${sidebarOpen ? "active" : ""}`}>
         <div className="sidebar-logo">
-          <h2>Projectify</h2>
+          <h2>{sidebarCollapsed ? "P" : "Projectify"}</h2>
         </div>
 
         <nav className="sidebar-nav">
           <ul>
-            {navigation.map((item) => {
-              const Icon = item.icon;
+            {links.map((link) => (
+              <li key={link.path}>
+                <NavLink
+                  to={link.path}
+                  className="sidebar-link"
+                  onClick={() => setSidebarOpen(false)}
+                  title={sidebarCollapsed ? link.label : undefined}
+                >
+                  <span className="sidebar-icon">{link.icon}</span>
 
-              return (
-                <li key={item.path}>
-                  <NavLink
-                    to={item.path}
-                    end={item.path === "/"}
-                    className={({ isActive }) =>
-                      isActive ? "sidebar-link active" : "sidebar-link"
-                    }
-                    onClick={() => setSidebarOpen(false)}
-                  >
-                    <Icon className="sidebar-icon" />
-
-                    <span>{item.name}</span>
-                  </NavLink>
-                </li>
-              );
-            })}
+                  <span className="sidebar-link-text">{link.label}</span>
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </nav>
+
+        {/* Desktop collapse button */}
+        <button
+          className="sidebar-collapse-button"
+          onClick={toggleSidebarCollapse}
+          aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          {sidebarCollapsed ? <FiChevronRight /> : <FiChevronLeft />}
+        </button>
       </aside>
     </>
   );

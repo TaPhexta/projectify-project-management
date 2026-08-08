@@ -1,0 +1,27 @@
+.project-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, .5);
+
+  z-index: 1000;
+}
+
+.project-modal {
+  width: min(700px, 95vw);
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 2rem;
+
+  border-radius: var(--radius-lg);
+
+  background: var(--clr-surface);
+
+  border: 1px solid var(--clr-border);
+}
